@@ -8,10 +8,13 @@ $( document ).ready( function () {
     var postsTemplateRaw = $('#posts-list-template').html();
     var navigationTemplateRaw = $('#navigation-template').html();
     var postsJsonTemplateRaw = $('#posts-json-template').html();
+    var postsTableTemplateRaw = $('#posts-table-template').html();
+
     var postTemplate = Handlebars.compile(postTemplateRaw);
     var postsTemplate = Handlebars.compile(postsTemplateRaw);
     var navigationTemplate = Handlebars.compile(navigationTemplateRaw);
     var postsJsonTemplate = Handlebars.compile(postsJsonTemplateRaw);
+    var postsTableTemplate = Handlebars.compile(postsTableTemplateRaw);
 
     Handlebars.registerPartial('post-preview', postTemplateRaw);
     Handlebars.registerHelper('bold', function (options) {
@@ -28,19 +31,20 @@ $( document ).ready( function () {
         }).join('');
     });
     Handlebars.registerHelper('json', function(options) {
-        console.log(options);
+        return '<pre>' + JSON.stringify(options, undefined, 2) + '</pre>';
+    });
 
-        var out = '';
+    Handlebars.registerHelper('table', function(options) {
+        //console.log('options: ' + options.hash.posts[2].description);
 
-        for (var i = 0; i < options.length; i++) {
-            out = out + '<div>' + options[i].description + '</div>';
+        var description = '';
+
+        for (var i = 0; i < options.hash.posts.length; i++) {
+            console.log('options: ' + options.hash.posts[i].description);
+            description = description + '<div>' + options.hash.posts[i].description + '</div>';
         }
 
-        return out;
-
-        //for (var i = 0; i < options.length; i++) {
-        //    console.log(options[i].id);
-        //}
+        return description;
     });
 
     render();
@@ -50,6 +54,7 @@ $( document ).ready( function () {
         renderPosts();
         renderNavigation();
         renderPostsJson();
+        renderPostsTable();
     }
 
     function subscribeHandlers() {
@@ -94,5 +99,13 @@ $( document ).ready( function () {
         });
 
         jQuery('.posts-json-container__list').html(html);
+    }
+
+    function renderPostsTable() {
+        var html = postsTableTemplate({
+            posts: posts
+        });
+
+        jQuery('.posts-table-container__list').html(html);
     }
 });

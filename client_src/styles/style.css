@@ -145,6 +145,10 @@ a {
     margin: 10px 0;
 }
 
+.posts-table-container__list div.odd {
+    background-color: #cccccc;
+}
+
 .navigation__number {
     display: inline-block;
     color: #127287;

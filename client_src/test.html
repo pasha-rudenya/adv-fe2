@@ -40,6 +40,9 @@
 
                 <div class="posts-json-container__list">
                 </div>
+
+                <div class="posts-table-container__list">
+                </div>
             </div>
         </div>
 
@@ -78,6 +81,12 @@
 
     <script type="text/x-handlebars-template" id="posts-json-template">
         {{{json posts}}}
+    </script>
+
+    <script type="text/x-handlebars-template" id="posts-table-template">
+        {{#table posts=posts}}
+            {{description}}
+        {{/table}}
     </script>
 
     <script src="libs/jquery/dist/jquery.js"></script>
