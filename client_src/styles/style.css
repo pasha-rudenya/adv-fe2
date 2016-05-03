@@ -145,8 +145,13 @@ a {
     margin: 10px 0;
 }
 
+.posts-table-container__list div.even {
+    background-color: #D9D9D9;
+    padding: 5px;
+}
+
 .posts-table-container__list div.odd {
-    background-color: #cccccc;
+    padding: 5px;
 }
 
 .navigation__number {

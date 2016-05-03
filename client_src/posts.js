@@ -40,8 +40,12 @@ $( document ).ready( function () {
         var description = '';
 
         for (var i = 0; i < options.hash.posts.length; i++) {
-            console.log('options: ' + options.hash.posts[i].description);
-            description = description + '<div>' + options.hash.posts[i].description + '</div>';
+            if(options.hash.posts[i].id % 2 == 0) {
+                description = description + '<div class="even">' + options.hash.posts[i].description + '</div>';
+            }
+            else {
+                description = description + '<div>' + options.hash.posts[i].description + '</div>';
+            }
         }
 
         return description;
