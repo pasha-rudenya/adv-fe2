@@ -11,28 +11,14 @@ $( document ).ready( function () {
         return '<pre>' + JSON.stringify(options, undefined, 2) + '</pre>';
     });
 
-    Handlebars.registerHelper('table', function(options) {
-        //console.log(options);
-
+    Handlebars.registerHelper('table', function(context, even, odd, options) {
         var description = '';
 
-        //for (var i = 0; i < options.hash.posts.length; i++) {
-        //    if(options.hash.posts[i].id % 2 == 0) {
-        //        description = description + '<div class="even">' + options.hash.posts[i].description + '</div>';
-        //    }
-        //    else {
-        //        description = description + '<div>' + options.hash.posts[i].description + '</div>';
-        //    }
-        //}
+        context.forEach(function(item, i, context) {
+            item.rowClass = (i % 2 === 0 ? even : odd);
 
-        for (var i = 0; i < options.length; i++) {
-            if(options[i].id % 2 == 0) {
-                description = description + '<div class="even">' + options[i].description + '</div>';
-            }
-            else {
-                description = description + '<div class="odd">' + options[i].description + '</div>';
-            }
-        }
+            description += options.fn(context[i]);
+        });
 
         return description;
     });

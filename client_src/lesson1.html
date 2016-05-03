@@ -21,8 +21,10 @@
     </script>
 
     <script type="text/x-handlebars-template" id="posts-table-template">
-        {{#table posts}}
-            {{description}}
+        {{#table posts 'even' 'odd'}}
+            <div class="{{rowClass}}">
+                {{description}}
+            </div>
         {{/table}}
     </script>
 

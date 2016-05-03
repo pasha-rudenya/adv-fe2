@@ -3,5 +3,4 @@ npm-debug.log
 client_src/posts_v1.html
 client_src/posts_v1.js
 client_src/libs/*
-node_modules/*
-node_modules/.bin/*
+node_modules/
