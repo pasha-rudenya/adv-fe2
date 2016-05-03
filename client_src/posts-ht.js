@@ -11,11 +11,11 @@ $( document ).ready( function () {
         return '<pre>' + JSON.stringify(options, undefined, 2) + '</pre>';
     });
 
-    Handlebars.registerHelper('table', function(context, even, odd, options) {
+    Handlebars.registerHelper('table', function(context, options) {
         var description = '';
 
         context.forEach(function(item, i, context) {
-            item.rowClass = (i % 2 === 0 ? even : odd);
+            item.rowClass = (i % 2 === 0 ? 'even' : 'odd');
 
             description += options.fn(context[i]);
         });
