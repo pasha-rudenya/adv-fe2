@@ -1,0 +1,12 @@
+{
+  "name": "lesson01",
+  "homepage": "https://github.com/pasha-rudenya/adv-fe2",
+  "dependencies": {
+    "underscore": "1.8.3",
+    "backbone": "^1.x.x",
+    "react": ">0.1.0",
+    "angular": "*",
+    "jquery": "^2.2.3",
+    "handlebars": "^4.0.5"
+  }
+}

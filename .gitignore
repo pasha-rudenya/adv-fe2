@@ -1,0 +1,4 @@
+.idea/*
+npm-debug.log
+client_src/libs/*
+node_modules/
