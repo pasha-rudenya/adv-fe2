@@ -12,10 +12,10 @@ $( document ).ready( function () {
     });
 
     Handlebars.registerHelper('table', function(context, options) {
-        var description = '', rowClass='';
+        var description = '';
 
         context.forEach(function(item, i) {
-            rowClass = (i % 2 === 0 ? 'even' : 'odd');
+            var rowClass = (i % 2 === 0 ? 'even' : 'odd');
             description += '<div class="' + rowClass + '">' + options.fn(item) + '</div>';
         });
 
