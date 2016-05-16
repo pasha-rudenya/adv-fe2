@@ -5,3 +5,4 @@ client_src/posts_v1.js
 client_src/libs/*
 node_modules/
 bin/
+libs/
