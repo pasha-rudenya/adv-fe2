@@ -97,15 +97,12 @@ gulp.task( 'watch', function () {
 gulp.task('csscomb', function () {
     return gulp.src('styles/*.less')
         .pipe(csscomb().on('error', handleError))
-        .pipe(gulpif(isAll, (gulp.dest(function (file) {
+        .pipe(gulpif(isAll(),
+            gitmodified('modified')
+        ))
+        .pipe(gulp.dest(function (file) {
             return file.base;
-        })),
-        gulp.dest(function () {
-            var files = getModifiedFiles();
-            files.on('data', function (file) {
-                return file.base;
-            });
-        })));
+        }));
 });
 
 gulp.task('htmlhint', function () {
@@ -140,12 +137,7 @@ function handleError(err) {
 }
 
 function isAll() {
-    if (argv.all === true) {
+    if (argv.all !== true) {
         return true;
     }
-}
-
-function getModifiedFiles() {
-    return gulp.src('styles/*.less')
-            .pipe(gitmodified('modified'));
 }
