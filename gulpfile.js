@@ -19,7 +19,7 @@ var uglify = require('gulp-uglify');
 var htmlhint = require('gulp-htmlhint');
 var htmlmin = require('gulp-htmlmin');
 var autoprefixer = require('gulp-autoprefixer');
-var gitmodified = require('gulp-modified');
+var gitmodified = require('gulp-gitmodified');
 
 //gulp.task('default', ['libs', 'build']);
 gulp.task('default', ['html', 'css', 'js', 'images']);
@@ -146,6 +146,6 @@ function isAll() {
 }
 
 function getModifiedFiles() {
-    return gulp.src()
+    return gulp.src('styles/*.less')
             .pipe(gitmodified('modified'));
 }
