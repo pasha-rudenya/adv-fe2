@@ -19,7 +19,7 @@ var uglify = require('gulp-uglify');
 var htmlhint = require('gulp-htmlhint');
 var htmlmin = require('gulp-htmlmin');
 var autoprefixer = require('gulp-autoprefixer');
-var changed = require('gulp-changed');
+var gitmodified = require('gulp-modified');
 
 //gulp.task('default', ['libs', 'build']);
 gulp.task('default', ['html', 'css', 'js', 'images']);
@@ -96,11 +96,16 @@ gulp.task( 'watch', function () {
 //CODESTYLE
 gulp.task('csscomb', function () {
     return gulp.src('styles/*.less')
-        .pipe(changed(destDir))
         .pipe(csscomb().on('error', handleError))
-        .pipe(gulp.dest(function (file) {
+        .pipe(gulpif(isAll, (gulp.dest(function (file) {
             return file.base;
-        }));
+        })),
+        gulp.dest(function () {
+            var files = getModifiedFiles();
+            files.on('data', function (file) {
+                return file.base;
+            });
+        })));
 });
 
 gulp.task('htmlhint', function () {
@@ -134,3 +139,13 @@ function handleError(err) {
     return this;
 }
 
+function isAll() {
+    if (argv.all === true) {
+        return true;
+    }
+}
+
+function getModifiedFiles() {
+    return gulp.src()
+            .pipe(gitmodified('modified'));
+}
