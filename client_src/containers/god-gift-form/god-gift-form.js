@@ -10,20 +10,17 @@ module.exports = function GodGiftForm() {
     var goldTunner = new GiftTunner({
         name: 'Gold',
         hateIndicator: godHateIndicator,
-        hateCount: 4,
-        amount: 20
+        hateCount: 4
     });
     var copperTunner = new GiftTunner({
         name: 'Copper',
         hateIndicator: godHateIndicator,
-        hateCount: 1,
-        amount: 30
+        hateCount: 1
     });
     var someTunner = new GiftTunner({
         name: 'Some',
         hateIndicator: godHateIndicator,
-        hateCount: 1,
-        amount: 30
+        hateCount: 1
     });
 
     function render() {

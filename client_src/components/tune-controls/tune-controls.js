@@ -15,7 +15,6 @@ module.exports = function TuneControls(options) {
     function subscribeHandlers() {
         elem.find('.tune-controls__inc').click(function() {
             bar.inc(); // <----
-            console.log(resource);
             hateIndicator.dec(hateCount); // <----
         });
         elem.find('.tune-controls__dec').click(function() {

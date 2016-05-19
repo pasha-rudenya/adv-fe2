@@ -1,5 +1,4 @@
 var Bar = require('components/bar/bar.js');
-var Resource = require('components/resource/resource.js');
 var TuneControls = require('components/tune-controls/tune-controls.js');
 
 module.exports = function GiftTunner(options) {
@@ -9,10 +8,8 @@ module.exports = function GiftTunner(options) {
     var hateCount = options.hateCount;
 
     var bar = new Bar({});
-    var resource = new Resource({});
     var controls = new TuneControls({
         bar: bar,
-        resource: resource.getAmount(),
         hateIndicator: hateIndicator,
         hateCount: hateCount
     });
