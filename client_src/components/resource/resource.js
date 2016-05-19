@@ -7,8 +7,10 @@ module.exports = function Resource(options) {
 
     function render() {
         elem.html(App.templates['resource']({
-            name: resource.name,
-            amount: resource.amount
+            resource: {
+                name: resource.name,
+                amount: resource.amount
+            }
         }));
         console.log(resource.name);
         return this;
@@ -16,16 +18,16 @@ module.exports = function Resource(options) {
 
     return {
         render: render,
-        inc: function(count) {
+        plus: function(count) {
             progress += count || 1;
             render();
         },
-        dec: function(count) {
+        minus: function(count) {
             progress -= count || 1;
             render();
         },
-        getCount: function() {
-            return progress;
+        getAmount: function() {
+            return resource.amount;
         },
         elem: elem
     }

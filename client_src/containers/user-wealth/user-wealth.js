@@ -1,7 +1,11 @@
 var Resource = require('components/resource/resource.js');
 
-module.exports = function UserWealth() {
+module.exports = function UserWealth(options) {
     var elem = $('<div></div>');
+
+    //var gold = options.goldResource;
+    //var copper = options.copperResource;
+    //var some = options.someResource;
 
     var goldResource = new Resource({
         name: 'Gold',

@@ -10,12 +10,20 @@ module.exports = function GodGiftForm() {
     var goldTunner = new GiftTunner({
         name: 'Gold',
         hateIndicator: godHateIndicator,
-        hateCount: 4
+        hateCount: 4,
+        amount: 20
     });
     var copperTunner = new GiftTunner({
         name: 'Copper',
         hateIndicator: godHateIndicator,
-        hateCount: 1
+        hateCount: 1,
+        amount: 30
+    });
+    var someTunner = new GiftTunner({
+        name: 'Some',
+        hateIndicator: godHateIndicator,
+        hateCount: 1,
+        amount: 30
     });
 
     function render() {
@@ -23,6 +31,7 @@ module.exports = function GodGiftForm() {
 
         elem.find('.god-gift-form__gold-tunner').html(goldTunner.render().elem);
         elem.find('.god-gift-form__copper-tunner').html(copperTunner.render().elem);
+        elem.find('.god-gift-form__some-tunner').html(someTunner.render().elem);
         elem.find('.god-gift-form__hate').html(godHateIndicator.render().elem);
 
         subscribeHandlers(elem);
@@ -32,7 +41,7 @@ module.exports = function GodGiftForm() {
 
     function subscribeHandlers(elem) {
         elem.find('.god-gift-form__send').click(function() {
-            console.log('send gift [gold: ' + goldTunner.getCount() + ', copper:' + copperTunner.getCount() + ']');
+            console.log('send gift [gold: ' + goldTunner.getCount() + ', copper:' + copperTunner.getCount() + ', some:' + someTunner.getCount() + ']');
         });
     }
 
