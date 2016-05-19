@@ -1,12 +1,14 @@
 {
-  "name": "lesson01",
-  "homepage": "https://github.com/pasha-rudenya/adv-fe2",
+  "name": "tst",
+  "description": "",
+  "main": "index.html",
+  "authors": [
+    "okonkwo <nickolas.shishov@yandex.ua>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/okonkwo/advanced-fe",
+  "moduleType": [],
   "dependencies": {
-    "underscore": "1.8.3",
-    "backbone": "^1.x.x",
-    "react": ">0.1.0",
-    "angular": "*",
-    "jquery": "^2.2.3",
-    "handlebars": "^4.0.5"
+    "jquery": "~2.1.4"
   }
 }
