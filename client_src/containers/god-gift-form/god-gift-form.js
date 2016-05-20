@@ -11,8 +11,6 @@ module.exports = function GodGiftForm(options) {
         hate: 30
     });
 
-    console.log(godHateIndicator.hate);
-
     for (var resource in resources) {
         tunners[resource] = new GiftTunner({
             name: resource,

@@ -3,11 +3,11 @@ var Bar = require('components/bar/bar.js');
 module.exports = function GodHateIndicator(options) {
     var elem = $('<div></div>');
 
-    var bar = new Bar({
-        count: options.hate
-    });
+    var hate = options.hate;
 
-    console.log(bar.count);
+    var bar = new Bar({
+        count: hate
+    });
 
     function render() {
         elem.html(App.templates['god-hate-indicator']({}));
@@ -21,9 +21,16 @@ module.exports = function GodHateIndicator(options) {
         elem: elem,
         inc: function(count) {
             bar.inc(count);
+            hate += count;
         },
         dec: function(count) {
-            bar.dec(count);
+            if (hate < count) {
+                return 0;
+            }
+            else {
+                bar.dec(count);
+                hate -= count;
+            }
         }
     }
 };
