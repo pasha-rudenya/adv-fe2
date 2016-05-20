@@ -21,11 +21,11 @@ module.exports = function Resource(options) {
         render: render,
         elem: elem,
         plus: function(count) {
-            resource.amount += count || 1;
+            resource.amount -= count || 1;
             render();
         },
         minus: function(count) {
-            resource.amount -= count || 1;
+            resource.amount += count || 1;
             render();
         },
         getAmount: function() {
