@@ -1,8 +1,10 @@
 module.exports = function Resource(options) {
     var elem = $('<div></div>');
+
     var resource = {
         name: options.name,
-        amount: options.amount
+        amount: options.amount,
+        hateCount: options.hateCount
     };
 
     function render() {
@@ -17,17 +19,20 @@ module.exports = function Resource(options) {
 
     return {
         render: render,
+        elem: elem,
         plus: function(count) {
-            progress += count || 1;
+            resource.amount += count || 1;
             render();
         },
         minus: function(count) {
-            progress -= count || 1;
+            resource.amount -= count || 1;
             render();
         },
         getAmount: function() {
             return resource.amount;
         },
-        elem: elem
+        getHateCount: function() {
+            return resource.hateCount;
+        }
     }
 };
