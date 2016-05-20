@@ -18,11 +18,11 @@ module.exports = function Resource(options) {
     return {
         render: render,
         plus: function(count) {
-            progress += count || 1;
+            resource.amount += count || 1;
             render();
         },
         minus: function(count) {
-            progress -= count || 1;
+            resource.amount -= count || 1;
             render();
         },
         getAmount: function() {
