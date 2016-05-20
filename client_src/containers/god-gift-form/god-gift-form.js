@@ -1,8 +1,12 @@
 var GiftTunner = require('containers/gift-tunner/gift-tunner.js');
 var GodHateIndicator = require('containers/god-hate-indicator/god-hate-indicator.js');
 
-module.exports = function GodGiftForm() {
+module.exports = function GodGiftForm(options) {
     var elem = $('<div></div>');
+
+    var resources = options.resources;
+
+    console.log(resources);
 
     var godHateIndicator = new GodHateIndicator({
         hate: 30
