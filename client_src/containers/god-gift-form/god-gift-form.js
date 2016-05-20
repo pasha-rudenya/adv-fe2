@@ -5,34 +5,29 @@ module.exports = function GodGiftForm(options) {
     var elem = $('<div></div>');
 
     var resources = options.resources;
-
-    console.log(resources);
+    var tunners = {};
 
     var godHateIndicator = new GodHateIndicator({
         hate: 30
     });
-    var goldTunner = new GiftTunner({
-        name: 'Gold',
-        hateIndicator: godHateIndicator,
-        hateCount: 4
-    });
-    var copperTunner = new GiftTunner({
-        name: 'Copper',
-        hateIndicator: godHateIndicator,
-        hateCount: 1
-    });
-    var someTunner = new GiftTunner({
-        name: 'Some',
-        hateIndicator: godHateIndicator,
-        hateCount: 1
-    });
+
+    console.log(godHateIndicator.hate);
+
+    for (var resource in resources) {
+        tunners[resource] = new GiftTunner({
+            name: resource,
+            hateIndicator: godHateIndicator,
+            resource: resources[resource]
+        });
+    }
 
     function render() {
         elem.html(App.templates['god-gift-form']({}));
 
-        elem.find('.god-gift-form__gold-tunner').html(goldTunner.render().elem);
-        elem.find('.god-gift-form__copper-tunner').html(copperTunner.render().elem);
-        elem.find('.god-gift-form__some-tunner').html(someTunner.render().elem);
+        for (var resource in tunners) {
+            elem.find('.god-gift-form__' + resource.toLowerCase() + '-tunner').html(tunners[resource].render().elem);
+        }
+
         elem.find('.god-gift-form__hate').html(godHateIndicator.render().elem);
 
         subscribeHandlers(elem);

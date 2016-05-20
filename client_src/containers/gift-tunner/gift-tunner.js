@@ -5,13 +5,13 @@ module.exports = function GiftTunner(options) {
     var elem = $('<div></div>');
 
     var hateIndicator = options.hateIndicator;
-    var hateCount = options.hateCount;
+    var resource = options.resource;
 
     var bar = new Bar({});
     var controls = new TuneControls({
         bar: bar,
         hateIndicator: hateIndicator,
-        hateCount: hateCount
+        resource: resource
     });
  
     function render() {

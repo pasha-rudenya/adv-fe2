@@ -32,6 +32,7 @@ module.exports = function UserWealth(options) {
     }
 
     return {
+        resources: resources,
         render: render,
         elem: elem
     }
