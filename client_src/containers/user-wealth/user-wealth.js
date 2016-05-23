@@ -19,16 +19,8 @@ module.exports = function UserWealth(options) {
         for (var resource in resources) {
             elem.find('.user-wealth__' + resource.toLowerCase()).html(resources[resource].render().elem);
         }
-
-        subscribeHandlers(elem);
-
+        
         return this;
-    }
-
-    function subscribeHandlers(elem) {
-        elem.find('.god-gift-form__send').click(function() {
-            console.log('send gift [gold: ' + goldTunner.getCount() + ', copper:' + copperTunner.getCount() + ']');
-        });
     }
 
     return {

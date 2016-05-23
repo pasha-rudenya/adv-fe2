@@ -35,7 +35,9 @@ module.exports = function GodGiftForm(options) {
 
     function subscribeHandlers(elem) {
         elem.find('.god-gift-form__send').click(function() {
-            console.log('send gift [gold: ' + goldTunner.getCount() + ', copper:' + copperTunner.getCount() + ', some:' + someTunner.getCount() + ']');
+            for (var resource in tunners) {
+                console.log('send gift [' + resource + ': ' + tunners[resource].getCount() + ']');
+            }
         });
     }
 
