@@ -14,12 +14,15 @@ module.exports = function UserWealth(options) {
     }
 
     function render() {
-        elem.html(App.templates['user-wealth']({}));
+        elem.html(App.templates['user-wealth']({
+            resources: resources
+        }));
 
+        console.log(resources);
         for (var resource in resources) {
-            elem.find('.user-wealth__' + resource.toLowerCase()).html(resources[resource].render().elem);
+            elem.find('.user-wealth__' + resource).html(resources[resource].render().elem);
         }
-        
+
         return this;
     }
 

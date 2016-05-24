@@ -1,12 +1,16 @@
 <div class="user-wealth">
     <h3>Wealth:</h3>
 
-    <div class="user-wealth__gold">
-    </div>
+    {{#each resources}}
+        <div class="user-wealth__{{@key}}">
+        </div>
+    {{/each}}
 
-    <div class="user-wealth__copper">
-    </div>
 
-    <div class="user-wealth__some">
-    </div>
+
+    <!--<div class="user-wealth__copper">-->
+    <!--</div>-->
+
+    <!--<div class="user-wealth__some">-->
+    <!--</div>-->
 </div>
