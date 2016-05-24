@@ -19,7 +19,7 @@ module.exports = function GodGiftForm(options) {
     var godPrefer = {
         'gold': 6,
         'copper': 2
-    }
+    };
 
     // create tuner resources (resource model) tuneResource
     // 

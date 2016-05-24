@@ -27,4 +27,4 @@ module.exports = Model.createModel({
     setCount: function(count) {
         this.set('count', count);
     }
-})
+});
