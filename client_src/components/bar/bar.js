@@ -16,8 +16,13 @@ module.exports = function Bar(options) {
             render();
         },
         dec: function(count) {
-            progress -= count || 1;
-            render();
+            if (progress === 0) {
+                return 0;
+            }
+            else {
+                progress -= count || 1;
+                render();
+            }
         },
         getCount: function() {
             return progress;

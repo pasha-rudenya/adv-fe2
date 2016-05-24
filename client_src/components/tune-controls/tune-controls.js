@@ -1,9 +1,9 @@
 module.exports = function TuneControls(options) {
     var elem = $('<div></div>');
 
-    var bar = options.bar; // <----
-    var hateIndicator = options.hateIndicator; // <----
-    var hateCount = options.hateCount; // <----
+    var bar = options.bar;
+    var hateIndicator = options.hateIndicator;
+    var resource = options.resource;
 
     function render() {
         elem.html(App.templates['tune-controls']({}));
@@ -14,12 +14,19 @@ module.exports = function TuneControls(options) {
 
     function subscribeHandlers() {
         elem.find('.tune-controls__inc').click(function() {
-            bar.inc(); // <----
-            hateIndicator.dec(hateCount); // <----
+            if (resource.getAmount() < resource.getHateCount()) {
+                return 0;
+            }
+            else {
+                bar.inc();
+                hateIndicator.dec(resource.getHateCount());
+                resource.plus(resource.getHateCount());
+            }
         });
         elem.find('.tune-controls__dec').click(function() {
-            bar.dec(); // <----
-            hateIndicator.inc(hateCount); // <----
+            bar.dec();
+            hateIndicator.inc(resource.getHateCount());
+            resource.minus(resource.getHateCount());
         });
     }
 
