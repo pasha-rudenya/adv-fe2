@@ -18,7 +18,6 @@ module.exports = function UserWealth(options) {
             resources: resources
         }));
 
-        console.log(resources);
         for (var resource in resources) {
             elem.find('.user-wealth__' + resource).html(resources[resource].render().elem);
         }
