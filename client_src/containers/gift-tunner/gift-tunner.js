@@ -16,7 +16,7 @@ module.exports = function GiftTunner(options) {
     function render() {
         elem.html(App.templates['gift-tunner']({}));
 
-        elem.find('.gift-tunner__name').html(options.name);
+        elem.find('.gift-tunner__name').html(options.resource.getName());
         elem.find('.gift-tunner__bar').html(bar.render().elem);
         elem.find('.gift-tunner__controls').html(controls.render().elem);
 
