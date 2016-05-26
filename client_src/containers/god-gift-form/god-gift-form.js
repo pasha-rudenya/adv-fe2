@@ -12,10 +12,10 @@ module.exports = function GodGiftForm(options) {
     var hate = new Hate(BASE_HATE);
 
     var godHateIndicator = new GodHateIndicator({
-        hate: hate 
+        hate: hate
     });
 
-    // use it as map of gift impact 
+    // use it as map of gift impact
     var godPrefer = {
         'gold': 6,
         'copper': 2
@@ -42,7 +42,13 @@ module.exports = function GodGiftForm(options) {
 
         // (3)
         gift.subscribe(function() {
-
+            var name = gift.getName();
+            godHateIndicator.dec(godPrefer[name.toLowerCase()]);
+            resources.forEach(function(resource) {
+                if (resource.getName() === name ) {
+                    resource.dec(godPrefer[name.toLowerCase()]);
+                }
+            });
         });
 
         return gift;
@@ -71,7 +77,7 @@ module.exports = function GodGiftForm(options) {
     function subscribeHandlers(elem) {
         elem.find('.god-gift-form__send').click(function() {
             console.log(
-                'send gift [' + 
+                'send gift [' +
                 tunnerResources.map(function(resource) {
                     return resource.getName() + ':' + resource.getCount()
                 }) +
