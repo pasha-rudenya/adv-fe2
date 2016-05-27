@@ -18,7 +18,8 @@ module.exports = function GodGiftForm(options) {
     // use it as map of gift impact
     var godPrefer = {
         'gold': 6,
-        'copper': 2
+        'copper': 2,
+        'some': 1
     };
 
     // create tuner resources (resource model) tuneResource (1)
@@ -43,6 +44,7 @@ module.exports = function GodGiftForm(options) {
         // (3)
         gift.subscribe(function() {
             var name = gift.getName();
+
             godHateIndicator.dec(godPrefer[name.toLowerCase()]);
             resources.forEach(function(resource) {
                 if (resource.getName() === name ) {
