@@ -23,7 +23,12 @@ module.exports = function GodLoveIndicator(options) {
             hate.inc(count);
         },
         dec: function(count) {
-            hate.dec(count);
+            if (hate.getCount() < count) {
+                return 0;
+            }
+            else {
+                hate.dec(count);
+            }
         }
     }
 };

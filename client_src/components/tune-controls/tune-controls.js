@@ -17,7 +17,12 @@ module.exports = function TuneControls(options) {
             model.inc();
         });
         elem.find('.tune-controls__dec').click(function() {
-            model.dec();
+            if (model.getCount() === 0) {
+                return 0;
+            }
+            else {
+                model.dec();
+            }
         });
     }
 

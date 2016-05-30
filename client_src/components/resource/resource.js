@@ -4,6 +4,7 @@ module.exports = function Resource(options) {
     var resource = options.resource;
 
     // subscribe on resource
+    resource.subscribe(render);
 
     function render() {
         elem.html(App.templates['resource']({}));

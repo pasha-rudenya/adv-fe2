@@ -41,16 +41,26 @@ module.exports = function GodGiftForm(options) {
             count: 0
         });
 
+        gift.currentCount = gift.getCount();
+
         // (3)
         gift.subscribe(function() {
             var name = gift.getName();
+            var count = gift.getCount();
 
-            godHateIndicator.dec(godPrefer[name.toLowerCase()]);
+            if (count < 0) {
+                return;
+            }
+
+            godHateIndicator.dec((count - gift.currentCount) * (godPrefer[name.toLowerCase()]));
+
             resources.forEach(function(resource) {
-                if (resource.getName() === name ) {
-                    resource.dec(godPrefer[name.toLowerCase()]);
+                if (resource.getName() === name) {
+                    resource.dec(count - gift.currentCount)
                 }
             });
+
+            gift.currentCount = count;
         });
 
         return gift;
