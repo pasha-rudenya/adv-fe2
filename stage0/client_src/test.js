@@ -1,6 +1,7 @@
 var BASE_PATH = '/json-server';
 var USERS_URL = '/users/';
 var POSTS_URL = '/posts/';
+var POST_ID = '466';
 
 var getPosts = fetch(BASE_PATH + POSTS_URL)
     .then(function(res) {
@@ -8,7 +9,7 @@ var getPosts = fetch(BASE_PATH + POSTS_URL)
 });
 
 // 1.1
-fetch(BASE_PATH + POSTS_URL + 466, {
+fetch(BASE_PATH + POSTS_URL + POST_ID, {
     method: 'PATCH',
     headers: {
         'Accept': 'application/json',
@@ -39,29 +40,32 @@ getPosts.then(function(posts) {
 });
 
 // 1.3
-//var getUsers = fetch(BASE_PATH + USERS_URL)
-//    .then(function(res) {
-//        return res.json();
-//    });
-//
-//fetch(BASE_PATH + POSTS_URL + 466).then(function(post) {
-//    return post.json();
-//})
-//    .then(function(post) {
-//        console.log(getUsers);
-//        post.comments.forEach(function(comment) {
-//            console.log(comment);
-//        });
-//    });
+fetch(BASE_PATH + POSTS_URL + POST_ID)
+    .then(function(response) {
+        return response.json();
+    })
+    .then(function(post) {
+        Promise.all(post.comments.map(function(comment) {
+            return fetch(BASE_PATH + USERS_URL + comment.user)
+                .then(function(response) {
+                    return response.json();
+                })
+                .then(function(result) {
+                    return {
+                        user: result.name,
+                        text: comment.text
+                    };
+                });
+        }))
+        .then(function(comments) {
+                comments.forEach(function(comment) {
+                    var para = document.createElement('p');
+                    var node = document.createTextNode(comment.user + ': ' + comment.text);
 
-Promise.all([
-    fetch(BASE_PATH + POSTS_URL + 466),
-    fetch(BASE_PATH + USERS_URL)
-]).then(function(results) {
-    return results;
-}).then(function(results) {
-    results.forEach(function(result) {
-        console.log(result);
-        console.log(result.json());
+                    para.appendChild(node);
+
+                    var element = document.getElementsByClassName('content')[0];
+                    element.appendChild(para);
+                });
+            });
     });
-});
