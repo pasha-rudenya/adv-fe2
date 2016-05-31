@@ -7,7 +7,9 @@
     "dev": "gulp dev & node app.js"
   },
   "dependencies": {
-    "express": "^4.13.4"
+    "express": "^4.13.4",
+    "json-server": "^0.8.8",
+    "path": "^0.12.7"
   },
   "devDependencies": {
     "ct-creator": "0.0.1",
