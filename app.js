@@ -70,17 +70,12 @@ function renderAdvanced(req, res) {
     var filePath = path.join(__dirname, fileName);
     console.log(req.method, filePath);
 
-    fs.readdir(filePath, function(err, data) {
-        if (err) {
-            throw  err;
-        }
-        fs.stat(data, function(err, ))
-    });
+    var directories = getDirectories(filePath);
+
+    console.log(directories);
 
     if (fs.statSync(filePath)) {
-
         res.setHeader('content-type', 'application/json');
-
         fs.createReadStream(filePath).pipe(res);
     }
     else {
@@ -98,6 +93,12 @@ function renderAdvanced(req, res) {
             ])
             .end();
     }
+}
+
+function getDirectories(srcpath) {
+    return fs.readdirSync(srcpath).filter(function(file) {
+        return fs.statSync(path.join(srcpath, file)).isDirectory();
+    });
 }
 
 //
