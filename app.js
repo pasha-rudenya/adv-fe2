@@ -25,10 +25,10 @@ app.all('/test/', function (req, res) {
 });
 
 app.all('/api/' + apiVersion + '/*', function (req, res) {
-    // console.log(req);
-
-    render(req, res);
+    //render(req, res);
+    renderAdvanced(req, res);
 });
+
 
 function render(req, res) {
 
@@ -39,6 +39,43 @@ function render(req, res) {
     var filePath = path.join(__dirname, fileName);
     console.log(req.method, filePath);
     // /Users/puzankov/work/fs/node-js-getting-started/api/users/get.json
+
+    if (fs.statSync(filePath)) {
+
+        res.setHeader('content-type', 'application/json');
+
+        fs.createReadStream(filePath).pipe(res);
+    }
+    else {
+        console.log('no such file', filePath);
+
+        res
+            .status(404)
+            .json([
+                {
+                    "info": {
+                        "success": false,
+                        "code": 12345
+                    }
+                }
+            ])
+            .end();
+    }
+}
+
+function renderAdvanced(req, res) {
+    var fileName =req.path + '/';
+    fileName = fileName.replace('/' + apiVersion + '/', '/');
+
+    var filePath = path.join(__dirname, fileName);
+    console.log(req.method, filePath);
+
+    fs.readdir(filePath, function(err, data) {
+        if (err) {
+            throw  err;
+        }
+        fs.stat(data, function(err, ))
+    });
 
     if (fs.statSync(filePath)) {
 
