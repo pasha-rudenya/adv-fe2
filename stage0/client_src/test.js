@@ -21,23 +21,19 @@ fetch(BASE_PATH + POSTS_URL + POST_ID, {
 });
 
 // 1.2
-getPosts.then(function(posts) {
-    var count = 0;
-    posts.forEach(function(post) {
-        count += post.likeCount;
-    });
+getPosts
+    .then(function(posts) {
+        var count = 0;
+        posts.forEach(function(post) {
+            count += post.likeCount;
+        });
 
-    return count;
-})
+        return count;
+    })
     .then(function(count) {
-        var para = document.createElement('p');
-        var node = document.createTextNode('Count of likes: ' + count);
-
-        para.appendChild(node);
-
-        var element = document.getElementsByClassName('content')[0];
-        element.appendChild(para);
-});
+        appendText('Count of likes: ' + count);
+    }
+);
 
 // 1.3
 fetch(BASE_PATH + POSTS_URL + POST_ID)
@@ -59,13 +55,15 @@ fetch(BASE_PATH + POSTS_URL + POST_ID)
         }))
         .then(function(comments) {
                 comments.forEach(function(comment) {
-                    var para = document.createElement('p');
-                    var node = document.createTextNode(comment.user + ': ' + comment.text);
-
-                    para.appendChild(node);
-
-                    var element = document.getElementsByClassName('content')[0];
-                    element.appendChild(para);
+                    appendText(comment.user + ': ' + comment.text);
                 });
             });
-    });
+    }
+);
+
+function appendText(text) {
+    var para = document.createElement('p').appendChild(document.createTextNode(text));
+
+    var element = document.getElementsByClassName('content')[0];
+    element.appendChild(para);
+}
