@@ -14,11 +14,12 @@ module.exports = function Game() {
                     return [value];
                 });
 
-                var resourseList = resources[0].map(function(a) {
-                    return new Resource(a);
+                var resourcesList = resources[0].map(function(resource) {
+                    return new Resource(resource);
                 });
 
-                renderModels(resourseList);
+                renderModels(resourcesList);
+
                 return resources;
             });
     }
