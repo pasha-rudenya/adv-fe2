@@ -16,7 +16,7 @@ app.use('/json-server', jsonServer.router('api/mocks/db.json'));
 
 app.use('/', express.static(path.join(__dirname, CLIENT_PATH, '/')));
 
-var server = app.listen(3000, function () {
+var server = app.listen(3005, function () {
     var host = server.address().address;
     var port = server.address().port;
     console.log('listening ' + host + ':' +  port);
