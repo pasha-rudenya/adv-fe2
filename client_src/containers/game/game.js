@@ -38,6 +38,7 @@ module.exports = function Game() {
         elem.find('.game__wealth').html(userWealth.render().elem);
     }
 
+
     function render() {
         getData();
 
