@@ -6,6 +6,7 @@ module.exports = function GodLoveInicator(options) {
     var hate = options.hate;
 
     var bar = new Bar();
+    bar.setCount(hate.getCount());
 
     hate.subscribe(function() {
         bar.setCount(hate.getCount());

@@ -17,4 +17,4 @@ module.exports = Model.createModel({
     getCount: function() {
         return this.get('count');
     }
-})
+});
