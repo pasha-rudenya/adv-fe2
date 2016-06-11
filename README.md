@@ -23,4 +23,5 @@ E2E: Проверяем, что `God hate indicator` правильно меня
 
 #### Документация и официальные страницы
 1. [Jasmine](http://jasmine.github.io/edge/introduction.html)
-2. [WEBDRIVER IO](http://webdriver.io/api.html)   
+2. [WEBDRIVER IO](http://webdriver.io/api.html) 
+  
