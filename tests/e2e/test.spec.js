@@ -1,6 +1,11 @@
 describe('page ', function () {
-    
-    beforeEach(function () {
+
+    var godHateInitial = 50;
+    var goldPrefer = 6;
+    var copperPrefer = 2;
+    var somePrefer = 1;
+
+    beforeAll(function() {
         browser.url('/');
     });
 
@@ -21,22 +26,18 @@ describe('page ', function () {
         expect(resAfter).toBe('19');
     });
 
-    it('God hate indicator has changed', function() {
-        var godHateInitial = 50;
-        var goldPrefer = 6;
-        var copperPrefer = 2;
-        var somePrefer = 1;
-
+    it('God hate indicator has changed. Increment', function() {
         var godHate = browser.getText('.god-hate-indicator__bar .bar');
 
         var goldCount = browser.getText('.gift-tunner__bar .bar')[0];
         var copperCount = browser.getText('.gift-tunner__bar .bar')[1];
         var someCount = browser.getText('.gift-tunner__bar .bar')[2];
 
-        expect(goldCount.length).toBe(0);
+        expect(goldCount.length).toBe(1);
         expect(copperCount.length).toBe(0);
         expect(someCount.length).toBe(0);
-        expect(godHate.length).toBe(godHateInitial);
+        expect(godHate.length).toBe(godHateInitial - goldPrefer * goldCount.length -
+            copperPrefer * copperCount.length - somePrefer * someCount.length);
 
         var incGold = browser.click('.god-gift-form__tunners > div:first-child ' +
             '.gift-tunner__controls .tune-controls__inc');
@@ -51,12 +52,14 @@ describe('page ', function () {
         someCount = browser.getText('.gift-tunner__bar .bar')[2];
         godHate = browser.getText('.god-hate-indicator__bar .bar');
 
-        expect(goldCount.length).toBe(1);
+        expect(goldCount.length).toBe(2);
         expect(copperCount.length).toBe(1);
         expect(someCount.length).toBe(1);
         expect(godHate.length).toBe(godHateInitial - goldPrefer * goldCount.length -
             copperPrefer * copperCount.length - somePrefer * someCount.length);
+    });
 
+    it('God hate indicator has changed. Decrement', function() {
         var decGold = browser.click('.god-gift-form__tunners > div:first-child' +
             ' .gift-tunner__controls .tune-controls__dec');
         var decCopper = browser.click('.god-gift-form__tunners > div:nth-child(2)' +
@@ -69,9 +72,10 @@ describe('page ', function () {
         someCount = browser.getText('.gift-tunner__bar .bar')[2];
         godHate = browser.getText('.god-hate-indicator__bar .bar');
 
-        expect(goldCount.length).toBe(0);
+        expect(goldCount.length).toBe(1);
         expect(copperCount.length).toBe(0);
         expect(someCount.length).toBe(0);
-        expect(godHate.length).toBe(godHateInitial);
+        expect(godHate.length).toBe(godHateInitial - goldPrefer * goldCount.length -
+            copperPrefer * copperCount.length - somePrefer * someCount.length);
     });
 });
