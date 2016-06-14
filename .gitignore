@@ -1,5 +1,5 @@
 .idea/
+node_modules/
 bower_components/
 client_build/
 errorShots/
-node_modules/
