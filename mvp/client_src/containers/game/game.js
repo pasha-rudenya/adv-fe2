@@ -8,11 +8,13 @@ module.exports = function Game() {
     var resources = [
         new Resource({
             name: 'Gold',
-            count: 20
+            count: 20,
+            godPrefer: 4
         }),
         new Resource({
             name: 'Copper',
-            count: 30
+            count: 30,
+            godPrefer: 2
         })
     ];
 

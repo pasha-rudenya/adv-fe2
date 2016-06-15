@@ -1,20 +1,34 @@
 module.exports = Model.createModel({
-    init: function(count) {
-        this.attributes.count = count || 0;
+    init: function (options) {
+        options = options || {};
+        $.extend(this.attributes, {
+            count: options.count || 0,
+            name: options.name,
+            godPrefer: options.godPrefer
+        });
     },
-    inc: function(count) {
+    inc: function (count) {
         this.set(
-            'count', 
+            'count',
             this.get('count') + (count || 1)
         );
     },
-    dec: function(count) {
+    dec: function (count) {
         this.set(
-            'count', 
+            'count',
             this.get('count') - (count || 1)
         );
     },
-    getCount: function() {
+    getCount: function () {
         return this.get('count');
+    },
+    getName: function () {
+        return this.get('name');
+    },
+    getGodPrefer: function () {
+        return this.get('godPrefer');
+    },
+    setCount: function (count) {
+        this.set('count', count);
     }
-});
+})
