@@ -1,0 +1,11 @@
+.resource {
+
+}
+
+.resource__name {
+    display: inline-block;
+}
+
+.resource__value {
+    display: inline-block;
+}
