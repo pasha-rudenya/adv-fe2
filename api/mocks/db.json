@@ -1,8 +1,16 @@
 {
     "wealth": {
         "resources": [
-            {"name": "gold", "count": 20},
-            {"name": "copper", "count": 13}
+            {
+              "name": "Gold",
+              "count": 20,
+              "godPrefer": 4
+            },
+            {
+              "name": "Copper",
+              "count": 30,
+              "godPrefer": 2
+            }
         ]
     }
 }

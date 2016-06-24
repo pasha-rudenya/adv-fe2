@@ -6,9 +6,16 @@ module.exports = function UserWealth(options) {
     var resources = options.resources;
 
     var ctResources = resources.map(function(resource) {
-        return new Resource({
-            resource: resource
+        var res = new Resource({
+            name: resource.getName(),
+            count: resource.getCount()
         });
+
+        resource.subscribe(function() {
+            res.setCount(resource.getCount());
+        });
+
+        return res;
     });
 
     function render() {
@@ -21,6 +28,7 @@ module.exports = function UserWealth(options) {
 
     return {
         render: render,
-        elem: elem
+        elem: elem,
+        resources: ctResources
     }
 };

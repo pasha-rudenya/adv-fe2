@@ -6,18 +6,33 @@ module.exports = function GiftTunner(options) {
 
     var resource = options.resource;
 
-    var bar = new Bar({
-        model: resource
+    var bar = new Bar();
+    var controls = new TuneControls();
+
+    var onIncCallback, onDecCallback;
+
+    controls.onInc(function() {
+        if (!onIncCallback()) {
+            return;
+        }
+        resource.inc();
+        render();
     });
-    var controls = new TuneControls({
-        model: resource
+
+    controls.onDec(function() {
+        if (!resource.getCount()) {
+            return;
+        }
+        onDecCallback();
+        resource.dec();
+        render();
     });
- 
+
     function render() {
         elem.html(App.templates['gift-tunner']({}));
 
         elem.find('.gift-tunner__name').html(resource.getName());
-        elem.find('.gift-tunner__bar').html(bar.render().elem);
+        elem.find('.gift-tunner__bar').html(bar.render(resource.getCount()).elem);
         elem.find('.gift-tunner__controls').html(controls.render().elem);
 
         return this;
@@ -25,9 +40,20 @@ module.exports = function GiftTunner(options) {
 
     return {
         render: render,
-        getCount: function() {
-            return bar.getCount();
+        resource: resource,
+        elem: elem,
+        getCount: function () {
+            return count;
         },
-        elem: elem
+        setCount: function (c) {
+            count = c;
+            render();
+        },
+        onInc: function (cb) {
+            onIncCallback = cb;
+        },
+        onDec: function (cb) {
+            onDecCallback = cb;
+        }
     }
 };

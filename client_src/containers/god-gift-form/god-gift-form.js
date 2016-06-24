@@ -6,8 +6,9 @@ var Hate = require('models/hate.js');
 module.exports = function GodGiftForm(options) {
     var elem = $('<div></div>');
 
-    var BASE_HATE = 50; // can be propogated from game
+    var BASE_HATE = 50;
     var resources = options.resources;
+    var tunnerResources = [];
 
     var hate = new Hate(BASE_HATE);
 
@@ -15,62 +16,42 @@ module.exports = function GodGiftForm(options) {
         hate: hate
     });
 
-    // use it as map of gift impact
-    var godPrefer = {
-        'gold': 6,
-        'copper': 2,
-        'some': 1
-    };
+    function calcHate() {
+        hate.setCount(
+            tunnerResources.reduce(function(counter, resource) {
+                return counter - resource.getCount() * resource.getGodPrefer();
+            }, BASE_HATE)
+        );
+    }
 
-    // create tuner resources (resource model) tuneResource (1)
-    //
-    // create gift components(gift-tuner) with tunerResouce (2)
-    //
-    // subscribe on tuner resouces (3)
-    // onChange -> set changes in reseouce
-    //
-
-    // subscribe on tunner resoures (3)
-    // onChange -> recalculate and set hate count
-    //
-
-    // (1)
-    var tunnerResources = resources.map(function(resource) {
+    var tunners = resources.map(function(resource) {
         var gift = new Resource({
             name: resource.getName(),
-            count: 0
+            count: 0,
+            godPrefer: resource.getGodPrefer()
         });
 
-        gift.currentCount = gift.getCount();
+        tunnerResources.push(gift);
 
-        // (3)
-        gift.subscribe(function() {
-            var name = gift.getName();
-            var count = gift.getCount();
+        var tunner = new GiftTunner({
+            resource: gift
+        });
 
-            if (count < 0) {
-                return;
+        tunner.onInc(function() {
+            if (!resource.getCount()) {
+                return false;
             }
-
-            godHateIndicator.dec((count - gift.currentCount) * (godPrefer[name.toLowerCase()]));
-
-            resources.forEach(function(resource) {
-                if (resource.getName() === name) {
-                    resource.dec(count - gift.currentCount)
-                }
-            });
-
-            gift.currentCount = count;
+            resource.dec();
+            return true;
         });
 
-        return gift;
-    });
-
-    // (2)
-    var tunners = tunnerResources.map(function(resource) {
-        return new GiftTunner({
-            resource: resource
+        tunner.onDec(function() {
+            resource.inc();
         });
+
+        gift.subscribe(calcHate);
+
+        return tunner;
     });
 
     function render() {
