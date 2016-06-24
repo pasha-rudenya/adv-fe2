@@ -1,26 +1,20 @@
-// espects model wiht getCount method
-module.exports = function Bar(options) {
+module.exports = function Bar() {
     var elem = $('<div></div>');
 
-    var model = options.model;
-    var progress = model.getCount();
+    var count = 0;
 
-    model.subscribe(function() {
-        progress = model.getCount();
-        render();
-    });
-
-    function render() {
+    function render(count) {
         elem.html(App.templates['bar']({
-            progress: Array(progress)
+            progress: Array(count)
         }));
         return this;
     }
 
     return {
         render: render,
-        getCount: function() {
-            return progress;
+        setCount: function(c) {
+            count = c;
+            render(c);
         },
         elem: elem
     }

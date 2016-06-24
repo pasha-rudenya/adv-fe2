@@ -2,20 +2,27 @@ module.exports = function Resource(options) {
     var elem = $('<div></div>');
 
     var resource = options.resource;
+    var name = options.name;
+    var count = options.count || 0;
 
-    // subscribe on resource
-    resource.subscribe(render);
+    render();
+
 
     function render() {
-        elem.html(App.templates['resource']({}));
-        elem.find('.resource__name').html(resource.getName());
-        elem.find('.resource__val').html(resource.getCount());
+        elem.html(App.templates['resource']({
+            name: name,
+            count: count
+        }));
 
         return this;
     }
 
     return {
         render: render,
-        elem: elem
+        elem: elem,
+        setCount: function(c) {
+            count = c;
+            render();
+        }
     }
 };

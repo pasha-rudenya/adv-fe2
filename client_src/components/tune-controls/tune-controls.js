@@ -3,7 +3,7 @@
 module.exports = function TuneControls(options) {
     var elem = $('<div></div>');
 
-    var model = options.model;
+    var onIncCallback, onDecCallback;
 
     function render() {
         elem.html(App.templates['tune-controls']({}));
@@ -14,20 +14,22 @@ module.exports = function TuneControls(options) {
 
     function subscribeHandlers() {
         elem.find('.tune-controls__inc').click(function() {
-            model.inc();
+            onIncCallback();
         });
+
         elem.find('.tune-controls__dec').click(function() {
-            if (model.getCount() === 0) {
-                return 0;
-            }
-            else {
-                model.dec();
-            }
+            onDecCallback();
         });
     }
 
     return {
         render: render,
+        onInc: function(cb) {
+            onIncCallback = cb;
+        },
+        onDec: function(cb) {
+            onDecCallback = cb;
+        },
         elem: elem
     }
 };
